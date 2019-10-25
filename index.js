@@ -13,7 +13,7 @@ var staticCells = [];
 var piece = null;
 var paused = false;
 
-var FIELD_WIDTH = 24;
+var FIELD_WIDTH = 12;
 var FIELD_HEIGHT = 25;
 
 ctx.canvas.width = CELL_WIDTH * FIELD_WIDTH;
@@ -307,7 +307,22 @@ document.body.onkeyup = function (e) {
             startGame();
         }
     }
-
+};
+document.body.ontouchend = function(e) {
+    var touch = e.changedTouches[e.changedTouches.length - 1];
+    if (touch) {
+        var x = touch.clientX;
+        var y = touch.clientY;
+        if (y < document.body.clientHeight / 2) {
+            keyMap[38] = true;
+        } else {
+            if (x > document.body.clientWidth / 2) {
+                keyMap[39] = true;
+            } else {
+                keyMap[37] = true;
+            }    
+        }
+    }
 };
 
 var lastTime = Date.now();
