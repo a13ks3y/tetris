@@ -3,7 +3,7 @@ setTimeout(() => document.getElementsByClassName('pause-hint')[0].style.display 
 //todo: OOP, refactoring.
 //todo: scores
 //todo: change size when window changes
-//todo: store scores in localSotrage/cookies.
+//todo: store scores in localStorage/cookies.
 //todo: pause indicator, effect
 var CELL_WIDTH = Math.floor(document.body.clientHeight / 25);
 var CELL_HEIGHT = Math.floor(document.body.clientHeight / 25);
@@ -137,7 +137,7 @@ var pieceNatures = {
     ]		
 };
 
-var fieldHeigth = function () {
+var fieldHeight = function () {
     return Math.floor(ctx.canvas.height / CELL_HEIGHT);
 };
 var fieldWidth = function () {
@@ -211,7 +211,6 @@ var renderCells = function (cells) {
 };	
 
 var checkLines = function () {
-    //todo
     for (var y = 0; y < staticCells[0].length; y ++) {
         var line = true;
         for (var x=0; x < staticCells.length; x ++) {
@@ -280,7 +279,7 @@ var rotatePiece = function (piece) {
     var pWidth = pieceWidth(piece);
     var pHeight = pieceHeight(piece);
     if (pWidth + piece.x > fieldWidth()
-        || pHeight + piece.y > fieldHeigth() || !checkPiece(piece)) {
+        || pHeight + piece.y > fieldHeight() || !checkPiece(piece)) {
         piece.rotationIndex = oldRotationIndex;
     } 
 };
@@ -308,19 +307,16 @@ document.body.onkeyup = function (e) {
         }
     }
 };
-document.body.ontouchend = function(e) {
-    var touch = e.changedTouches[e.changedTouches.length - 1];
-    if (touch) {
-        var x = touch.clientX;
-        var y = touch.clientY;
-        if (y < document.body.clientHeight / 2) {
-            keyMap[38] = true;
+document.body.onclick = function(e) {
+    var x = e.clientX;
+    var y = e.clientY;
+    if (y < document.body.clientHeight / 2) {
+        keyMap[38] = true;
+    } else {
+        if (x > document.body.clientWidth / 2) {
+            keyMap[39] = true;
         } else {
-            if (x > document.body.clientWidth / 2) {
-                keyMap[39] = true;
-            } else {
-                keyMap[37] = true;
-            }    
+            keyMap[37] = true;
         }
     }
 };
@@ -383,7 +379,7 @@ var startGame = function () {
     
 
             // LOGIC
-            if (checkPiece(piece) && piece.y < fieldHeigth() - pieceHeight(piece)) {
+            if (checkPiece(piece) && piece.y < fieldHeight() - pieceHeight(piece)) {
                 piece.y ++ ;
             } else {
                 renderPiece(piece, staticCells);
