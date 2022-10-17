@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <link rel="canonical" href="https://a13ks3y.github.io/tetris/" />
     <title>Tetris</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="index.css">
+    <link rel="icon" sizes="192x192" href="https://a13ks3y.github.io/gear.png">
 </head>
 <body>
 <div class="pause-hint">Click P to pause!</div>
 <canvas id="ctx" width="120" height="250"></canvas>
 <script type="text/javascript" src="index.js"></script>
+<script>
+    if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('/tetris/sw.js', {scope: '/tetris/'})
+    }
+</script>
 </body>
 </html>
