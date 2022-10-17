@@ -3,7 +3,9 @@ const VERSION = 'version_01';              // Version of the off-line cache (cha
 const CACHE_NAME = APP_PREFIX + VERSION;
 const URLS = [                            // Add URL you want to cache in this list.
     '/tetris/',                     // If you have separate JS/CSS files,
-    '/tetris/index.html'            // add path to those files here
+    '/tetris/index.html',            // add path to those files here
+    '/tetris/index.js',
+    '/tetris/index.css',
 ];
 
 // Respond with cached resources
